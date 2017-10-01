@@ -1,9 +1,9 @@
 ﻿// Section 1
 //    Import
 import { Component } from '@angular/core';
-import { Title }     from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
+import { Http, Response } from '@angular/http';
 import { KongService } from './kong.service';
-
 
 // Section 2
 //    Component Decorator
@@ -13,25 +13,20 @@ import { KongService } from './kong.service';
     templateUrl: 'app.component.html'
 })
 
-
 // Section 3
 //    Component Class
-export class AppComponent {
+//  export class AppComponent { }
+export class AppComponent { // AppComponent 
 
-    public constructor(private titleService: Title ) { }
-    
-    public setTitle( newTitle: string) {
-      this.titleService.setTitle( newTitle );
-    }
-    
-    // constructor(private kongService:KongService){
-        
-    // }
-        
-    // ngOnInit(){
-    //   console.log(this.kongService.cars)
-    // }
+  title = 'CMS-Dev Oauth Login';
 
-    title = 'Para CMS';    
+  public oauth: KongService;
+  // tslint:disable-next-line:one-line
+  constructor(private titleService: Title){
+  }
 
- }
+  public setTitle( newTitle: string) {
+    this.titleService.setTitle( newTitle );
+  }
+
+} // AppComponent

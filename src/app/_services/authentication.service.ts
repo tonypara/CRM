@@ -4,9 +4,13 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map'
 
 @Injectable()
+
 export class AuthenticationService {
     public token: string;
-
+    // public oauthEndpoint: string = 'https://35.184.90.216:8443/oauth2/authorize';
+    public oauthEndpoint: string = 'https://35.184.90.216:8443';
+    
+    // oauthEndpoint =    'http://104.154.156.230:8001/oauth2/authorize';
     constructor(private http: Http) {
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -14,8 +18,10 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string): Observable<boolean> {
-        return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-            .map((response: Response) => {
+        // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
+        // curl -X POST http://104.154.156.230:8001/oauth2/authorize     --data "name=oauth2"     --data "config.enable_authorization_code=true"     --data "config.scopes=email,phone,address"     --data "config.mandatory_scope=true"
+        return this.http.post(this.oauthEndpoint, JSON.stringify({ username: username, password: password }))
+        .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let token = response.json() && response.json().token;
                 if (token) {

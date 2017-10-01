@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('cmsauth App', () => {
+describe('cmsauth1.0 App', () => {
   let page: AppPage;
 
   beforeEach(() => {
