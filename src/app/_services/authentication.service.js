@@ -12,11 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
-var AuthenticationService = /** @class */ (function () {
+var AuthenticationService = /* @class */ (function () {
     // oauthEndpoint =    'http://104.154.156.230:8001/oauth2/authorize';
     function AuthenticationService(http) {
         this.http = http;
-        this.oauthEndpoint = 'http://104.154.156.230:8001/oauth2/authorize';
+        // this.oauthEndpoint = 'https://35.184.90.216:8443/oauth2/authorize';
+        this.oauthEndpoint = 'https://35.184.90.216:8443';
+        this.oauthEndpoint = 'http://35.184.90.216:8000';
         // set token if saved in local storage
         var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
@@ -24,7 +26,6 @@ var AuthenticationService = /** @class */ (function () {
     AuthenticationService.prototype.login = function (username, password) {
         var _this = this;
         // return this.http.post('/api/authenticate', JSON.stringify({ username: username, password: password }))
-        // curl -X POST http://104.154.156.230:8001/oauth2/authorize     --data "name=oauth2"     --data "config.enable_authorization_code=true"     --data "config.scopes=email,phone,address"     --data "config.mandatory_scope=true"
         return this.http.post(this.oauthEndpoint, JSON.stringify({ username: username, password: password }))
             .map(function (response) {
             // login successful if there's a jwt token in the response

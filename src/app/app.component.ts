@@ -18,7 +18,7 @@ import { KongService } from './kong.service';
 //  export class AppComponent { }
 export class AppComponent { // AppComponent 
 
-  title = 'CMS-Dev Oauth Login';
+  title = 'CRM-Dev Oauth Login';
 
   public oauth: KongService;
   // tslint:disable-next-line:one-line
